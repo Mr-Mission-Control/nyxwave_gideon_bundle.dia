@@ -1,0 +1,196 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "metadata": {
+    "agentSlug": "grokbot",
+    "displayName": "Grok Bot",
+    "operator": "MR Mission Control",
+    "sdk": "@grok/agent-sdk@0.5.0",
+    "model": {
+      "id": "grok-4.7",
+      "params": [
+        { "id": "reasoning_effort", "value": "high" },
+        { "id": "fast", "value": "true" }
+      ]
+    },
+    "updatedAtCdt": "2026-10-31T12:58:00-05:00",
+    "canvasUrl": "https://cursor.com/canvas/store-6c65b4d9-5426-4122-937e-413b839f3994/a26deaae-df6b-42d1-8814-47118be73a3d"
+  },
+  "connectors": [
+    {
+      "id": "google-drive",
+      "name": "Google Drive",
+      "namespace": "Google-drive",
+      "category": "MCP",
+      "status": "connected",
+      "authMode": "Google OAuth 2.0 (cursorAccount)",
+      "principal": "mrmissionctrl@gmail.com",
+      "configPath": "bot/mcp-connections/account.ts",
+      "advertiseTools": true,
+      "scopes": ["drive.readonly", "drive.file", "documents", "comments"],
+      "tools": [
+        "search_files",
+        "list_recent_files",
+        "read_file_content",
+        "create_file",
+        "update_file_content",
+        "export_file"
+      ],
+      "lastVerifiedCdt": "2026-10-31 12:04 PM CDT"
+    },
+    {
+      "id": "gmail",
+      "name": "Gmail",
+      "namespace": "Gmail",
+      "category": "MCP",
+      "status": "connected",
+      "authMode": "Google OAuth 2.0 (cursorAccount)",
+      "principal": "mrmissionctrl@gmail.com",
+      "configPath": "bot/mcp-connections/account.ts",
+      "advertiseTools": true,
+      "scopes": ["gmail.readonly", "gmail.compose", "gmail.modify", "gmail.labels"],
+      "tools": [
+        "search_emails",
+        "read_email",
+        "get_thread",
+        "create_draft",
+        "send_email",
+        "update_email_labels"
+      ],
+      "lastVerifiedCdt": "2026-10-31 11:45 AM CDT"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "namespace": "github",
+      "category": "Channel",
+      "status": "connected",
+      "authMode": "Cursor Account Stream (--cursor-events)",
+      "principal": "Mr-Mission-Control/*",
+      "configPath": "bot/channels/github.ts",
+      "advertiseTools": true,
+      "repos": [
+        "Mr-Mission-Control/nyxwave_gideon_bundle.dia",
+        "Mr-Mission-Control/awesome-browser-extensions-for-github"
+      ],
+      "scopes": ["pull_requests:write", "checks:read", "contents:write", "issues:write"],
+      "hooks": ["onPullRequest", "onCheckSuite", "onWorkflowRun", "onComment", "onIssue"],
+      "lastVerifiedCdt": "2026-10-31 12:53 PM CDT"
+    },
+    {
+      "id": "onedrive",
+      "name": "Microsoft OneDrive",
+      "namespace": "Onedrive",
+      "category": "MCP",
+      "status": "connected",
+      "authMode": "Microsoft Graph OAuth 2.0 (cursorAccount)",
+      "principal": "a7wingedseraphim@outlook.com",
+      "configPath": "bot/mcp-connections/account.ts",
+      "advertiseTools": true,
+      "scopes": ["Files.ReadWrite.All", "Sites.Read.All", "User.Read"],
+      "tools": [
+        "search_drive_items",
+        "list_drive_items",
+        "get_drive_item",
+        "create_or_update_file",
+        "move_or_rename_drive_item"
+      ],
+      "lastVerifiedCdt": "2026-10-31 12:56 PM CDT"
+    },
+    {
+      "id": "slack",
+      "name": "Slack Socket Mode",
+      "namespace": "slack",
+      "category": "Channel",
+      "status": "standby",
+      "authMode": "Socket Mode (GROKBOT_SLACK_BOT_TOKEN + GROKBOT_SLACK_APP_TOKEN)",
+      "principal": "MR Mission Control Workspace",
+      "configPath": "bot/channels/slack.ts",
+      "advertiseTools": false,
+      "scopes": ["app_mentions:read", "chat:write", "channels:history", "connections:write"],
+      "hooks": ["onMention", "onDirectMessage", "onChannelPost"],
+      "lastVerifiedCdt": "Pending slack create"
+    },
+    {
+      "id": "cursor-cloud",
+      "name": "Cursor Cloud & Subscriptions",
+      "namespace": "cursor-cloud",
+      "category": "Host",
+      "status": "connected",
+      "authMode": "Host Runtime Service Account",
+      "principal": "env: ffa674dd-d553-11f1-a7e4-4605a90eab71",
+      "configPath": "bot/host-connections/cloud.ts",
+      "advertiseTools": false,
+      "scopes": ["agents:read", "environments:read", "subscriptions:manage", "kv:readwrite"],
+      "tools": [
+        "run-info",
+        "list-cloud-agents",
+        "environment-info",
+        "subscribe_github_pr",
+        "subscribe_github_ci"
+      ],
+      "lastVerifiedCdt": "2026-10-31 12:58 PM CDT"
+    }
+  ],
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Large",
+      "weight": "Bolder",
+      "text": "Grok Bot — Connector Card (MR Mission Control)"
+    },
+    {
+      "type": "TextBlock",
+      "isSubtle": true,
+      "wrap": true,
+      "text": "Model: grok-4.7 (reasoning_effort=high, fast=true) · SDK: @grok/agent-sdk@0.5.0 · Active Connectors: 5/6"
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Google Drive (MCP)",
+          "value": "Connected — mrmissionctrl@gmail.com (Nyxwave Team Logs)"
+        },
+        {
+          "title": "Gmail (MCP)",
+          "value": "Connected — mrmissionctrl@gmail.com (OAuth verified 11:45 AM CDT)"
+        },
+        {
+          "title": "GitHub (Channel)",
+          "value": "Connected — Mr-Mission-Control/nyxwave_gideon_bundle.dia"
+        },
+        {
+          "title": "OneDrive (MCP)",
+          "value": "Connected — a7wingedseraphim@outlook.com"
+        },
+        {
+          "title": "Slack (Channel)",
+          "value": "Standby — Socket Mode (GROKBOT_SLACK_*)"
+        },
+        {
+          "title": "Cursor Cloud (Host)",
+          "value": "Connected — env ffa674dd-d553-11f1-a7e4-4605a90eab71"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Open Interactive Connector Card Canvas",
+      "url": "https://cursor.com/canvas/store-6c65b4d9-5426-4122-937e-413b839f3994/a26deaae-df6b-42d1-8814-47118be73a3d"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Open Nyxwave Change Log",
+      "url": "https://docs.google.com/document/d/1qMkbjUpnrVIzcKs0McOuyZiCVR-tMxrdHkMiqeKDstk/edit"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Open Nyxwave Runbook",
+      "url": "https://docs.google.com/document/d/1Yuk4MjSWb5ou4g0ESEKOVHA6R0KYXb4rS0bCjdL6RXM/edit"
+    }
+  ]
+}
